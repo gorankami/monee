@@ -1,22 +1,18 @@
 import React from 'react'
 import './App.css'
+import { isUserAgentMobile } from '../isUserAgentMobile'
 import StoreProvider from './StoreProvider'
 import MobileFooter from './MobileFooter'
 import DesktopMenu from './DesktopMenu'
-import { isUserAgentMobile } from '../isUserAgentMobile'
-import TransactionsPage from './Pages/Transactions/TransactionsPage'
+import Pages from './Pages/Pages'
 
 function App() {
   const isMobile = isUserAgentMobile()
-  let mainContentClass = 'main-content'
-  if (!isMobile) mainContentClass += ' desktop'
   return (
     <div className="App">
       <StoreProvider>
         {!isMobile && <DesktopMenu />}
-        <div className={mainContentClass}>
-          <TransactionsPage />
-        </div>
+        <Pages />
         {isMobile && <MobileFooter />}
       </StoreProvider>
     </div>

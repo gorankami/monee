@@ -1,3 +1,5 @@
+import { PAGE_NAME_TRANSACTIONS } from "../Components/Pages/pageNames"
+
 const ts = localStorage.getItem('transactions')
 const pcs = localStorage.getItem('purposeCategory')
 let transactions = []
@@ -20,4 +22,9 @@ export const defaultState = {
   PageTransactions: {
     filteredTransactions: [],
   },
+  currentPage: PAGE_NAME_TRANSACTIONS,
+  config: {
+    target: "",
+    targetAccountNumber: ""
+  }
 }

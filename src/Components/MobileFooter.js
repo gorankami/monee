@@ -1,12 +1,11 @@
 import React from 'react'
-import "./MobileFooter.css"
+import './MobileFooter.css'
+import Nav from './Nav'
 
 export default function MobileFooter() {
   return (
     <footer className="MobileFooter">
-      <div>Overview</div>
-      <div className="active">Transactions</div>
-      <div>Config</div>
+      <Nav />
     </footer>
   )
 }

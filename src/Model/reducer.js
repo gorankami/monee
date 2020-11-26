@@ -7,6 +7,7 @@ export const CATEGORY_FORM_OPEN = 'CATEGORY_FORM_OPEN'
 export const CATEGORY_FORM_CANCEL = 'CATEGORY_FORM_CANCEL'
 export const CATEGORY_FORM_SELECT = 'CATEGORY_FORM_SELECT'
 export const PAGE_TRANSACTIONS_FILTER_MONTH = 'PAGE_TRANSACTIONS_FILTER_MONTH'
+export const PAGE_GOTO = 'PAGE_GOTO'
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -34,8 +35,16 @@ export default function reducer(state, action) {
       return {
         ...state,
         PageTransactions: {
-          filteredTransactions: filterByMonth(state.transactions, action.payload),
+          filteredTransactions: filterByMonth(
+            state.transactions,
+            action.payload,
+          ),
         },
+      }
+    case PAGE_GOTO:
+      return {
+        ...state,
+        currentPage: action.payload,
       }
     default:
       return state
