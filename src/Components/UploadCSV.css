@@ -1,0 +1,18 @@
+.UploadCSV {
+  border-radius: 6px;
+  color: var(--clr-text);
+  font-size: 12px;
+  font-weight: bold;
+  background: #23ec77;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border:0;
+}
+
+.UploadCSV:hover {
+  background: #1bd367;
+  /* color: var(--clr-menu-text); */
+  color: var(--clr-text);
+  text-decoration: none;
+  cursor: pointer;
+}

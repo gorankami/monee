@@ -1,0 +1,86 @@
+.Header {
+  position: relative;
+  background-color: var(--clr-accent);
+  color: var(--clr-menu-text);
+  width: 100%;
+  padding-left: 20px;
+  padding-top: 35px;
+  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'month csv'
+    'profit profit'
+    'expences income';
+}
+
+.Header .color-loss {
+  color: var(--clr-loss);
+}
+
+.Header .color-gain {
+  color: var(--clr-selection-gain);
+}
+
+.Header .month {
+  font-size: 24px;
+  text-decoration: underline;
+  grid-area: month;
+  cursor: pointer;
+}
+
+.Header .profit .amount {
+  font-size: 18px;
+}
+
+.Header .csv {
+  grid-area: csv;
+  text-align: right;
+  padding-top: 10px;
+  padding-right: 20px;
+}
+
+.Header .profit {
+  grid-area: profit;
+}
+
+.Header .expences {
+  grid-area: expences;
+}
+
+.Header .income {
+  grid-area: income;
+}
+
+.Header .profit .label,
+.Header .expences .label,
+.Header .income .label {
+  font-size: 10px;
+}
+
+.Header .dropdown {
+  height: 500px;
+  width: 200px;
+  overflow: auto;
+  background-color: var(--clr-fg);
+  color: var(--clr-text);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 5px;
+  margin: 5px;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  z-index: 10;
+}
+
+.Header .dropdown div {
+  padding: 3px;
+}
+
+.Header .dropdown div:hover {
+  cursor: pointer;
+  background-color:darkmagenta;
+  color: white;
+}

@@ -1,0 +1,14 @@
+.TransactionRow {
+  border: 1px solid black;
+}
+
+.TransactionRow .date {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.TransactionRow .amount {
+  font-family: 'Roboto Mono', monospace;
+  text-align: right;
+  font-weight: bold;
+}

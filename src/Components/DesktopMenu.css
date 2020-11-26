@@ -1,0 +1,26 @@
+.DesktopMenu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 158px;
+  float: left;
+  background-color: var(--clr-nav-bg);
+  color: var(--clr-menu-text);
+}
+
+.DesktopMenu div {
+  box-sizing: border-box;
+  width: 158px;
+  padding: 5px;
+}
+
+.DesktopMenu .brand {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.DesktopMenu .active {
+  border-right: 4px solid var(--clr-selection-gain);
+  color: var(--clr-selection-gain);
+}

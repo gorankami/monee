@@ -1,0 +1,38 @@
+.CategoriesForm {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(121, 120, 120, 0.219);
+  z-index: 10;
+}
+
+.CategoriesForm .content {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  position:absolute;
+  padding:20px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+}
+
+.CategoriesForm .content li {
+    padding: 2px 5px;
+
+}
+
+.CategoriesForm .content li:hover {
+    background-color: rgb(60, 124, 243);
+    color: white;
+}
+
+.CategoriesForm .form input{
+    margin: 2px;
+    padding: 2px;
+}

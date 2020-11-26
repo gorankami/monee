@@ -1,0 +1,16 @@
+.MobileFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--clr-nav-bg);
+  color: var(--clr-menu-text);
+  display: flex;
+  justify-content: space-evenly;
+  line-height: 40px;
+}
+
+.MobileFooter .active {
+  border-top: 4px solid var(--clr-selection-gain);
+  color: var(--clr-selection-gain);
+}

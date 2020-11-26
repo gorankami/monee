@@ -1,0 +1,82 @@
+.TransactionList {
+  margin: 0 auto;
+  max-width: 680px;
+  margin-top: 20px;
+}
+
+.TransactionListItem {
+  background-color: var(--clr-fg);
+  color: var(--clr-text);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 5px;
+  margin: 5px;
+  position: relative;
+  font-size: 12px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 75px 35px auto auto;
+  grid-template-areas:
+    'date   date     target  category'
+    'amount currency purpose purpose';
+  column-gap: 5px;
+  row-gap: 2px;
+  align-items: center;
+}
+
+.TransactionListItem .date {
+  font-size: 10px;
+  color: var(--clr-text-secondary);
+  grid-area: date;
+}
+
+.TransactionListItem .loss {
+  margin-left: 3px;
+  color: var(--clr-loss);
+}
+
+.TransactionListItem .gain {
+  margin-left: 3px;
+  color: var(--clr-selection-gain);
+}
+
+.TransactionListItem .category {
+  text-align: right;
+  font-size: 10px;
+  color: var(--clr-text-secondary);
+  background-color: #fff5be;
+  border: 1px solid #f5e277;
+  border-radius: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  grid-area: category;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: min-content;
+  justify-self: end;
+}
+
+.TransactionListItem .currency {
+  grid-area: currency;
+}
+
+.TransactionListItem .amount {
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  grid-area: amount;
+}
+.TransactionListItem .purpose {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  grid-area: purpose;
+}
+
+.TransactionListItem .target {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  grid-area: target;
+}
