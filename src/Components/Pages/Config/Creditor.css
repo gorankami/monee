@@ -1,0 +1,12 @@
+.Creditor{
+    display: flex;
+    flex-direction: column;
+}
+
+.Creditor .pick-creditor {
+    position: relative;
+}
+
+.Creditor .pick-creditor div {
+    
+}

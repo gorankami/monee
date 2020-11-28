@@ -10,7 +10,6 @@ export default function ConfigPage() {
     <div className="ConfigPage">
       <h2>Creditor</h2>
       <Creditor />
-
       <h2>Data</h2>
       {state.transactions.length && (
         <p>Number of transactions: {state.transactions.length}</p>
