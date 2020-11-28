@@ -8,6 +8,7 @@ export const CATEGORY_FORM_CANCEL = 'CATEGORY_FORM_CANCEL'
 export const CATEGORY_FORM_SELECT = 'CATEGORY_FORM_SELECT'
 export const PAGE_TRANSACTIONS_FILTER_MONTH = 'PAGE_TRANSACTIONS_FILTER_MONTH'
 export const PAGE_GOTO = 'PAGE_GOTO'
+export const PAGE_CONFIG_SAVE_FIELD = 'PAGE_CONFIG_SAVE_FIELD'
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -45,6 +46,14 @@ export default function reducer(state, action) {
       return {
         ...state,
         currentPage: action.payload,
+      }
+    case PAGE_CONFIG_SAVE_FIELD:
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...action.payload
+        },
       }
     default:
       return state

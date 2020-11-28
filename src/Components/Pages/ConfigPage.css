@@ -1,0 +1,7 @@
+.ConfigPage {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
+  padding: 10px;
+}

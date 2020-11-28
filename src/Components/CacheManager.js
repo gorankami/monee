@@ -9,6 +9,7 @@ export default function CacheManager() {
       'purposeCategory',
       JSON.stringify(state.purposeCategory),
     )
+    localStorage.setItem('config', JSON.stringify(state.config))
   }, [state])
   return <></>
 }
