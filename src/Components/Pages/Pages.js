@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Context } from '../StoreProvider'
-import ConfigPage from './ConfigPage'
+import ConfigPage from './Config/ConfigPage'
+import TransactionsPage from './Transactions/TransactionsPage'
 import {PAGE_NAME_TRANSACTIONS, PAGE_NAME_CONFIG} from "./pageNames"
 
 import { isUserAgentMobile } from '../../isUserAgentMobile'
-import TransactionsPage from './Transactions/TransactionsPage'
 
 export default function Pages() {
   const [state] = useContext(Context)

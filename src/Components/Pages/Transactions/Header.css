@@ -10,7 +10,7 @@
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
   grid-template-areas:
-    'month csv'
+    'month .'
     'profit profit'
     'expences income';
 }
@@ -34,12 +34,12 @@
   font-size: 18px;
 }
 
-.Header .csv {
+/* .Header .csv {
   grid-area: csv;
   text-align: right;
   padding-top: 10px;
   padding-right: 20px;
-}
+} */
 
 .Header .profit {
   grid-area: profit;

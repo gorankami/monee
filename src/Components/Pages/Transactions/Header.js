@@ -54,9 +54,6 @@ export default function Header() {
           ))}
         </div>
       )}
-      <div className="csv">
-        <UploadDB />
-      </div>
       <div className="profit">
         <div className="label">Profit</div>
         <div className="amount">
