@@ -1,8 +1,9 @@
 import { postPurposeCategory } from '../apiActions'
 import { filterByMonth } from '../digest/filterByMonth'
 
-export const TRANSACTIONS_LOAD = 'TRANSACTIONS_LOAD'
-export const PURPOSE_CATEGORY_LOAD = 'PURPOSE_CATEGORY_LOAD'
+export const API_TRANSACTIONS_LOAD = 'API_TRANSACTIONS_LOAD'
+export const API_PURPOSE_CATEGORY_LOAD = 'API_PURPOSE_CATEGORY_LOAD'
+export const API_CONFIG_LOAD = 'API_CONFIG_LOAD'
 export const CATEGORY_FORM_OPEN = 'CATEGORY_FORM_OPEN'
 export const CATEGORY_FORM_CANCEL = 'CATEGORY_FORM_CANCEL'
 export const CATEGORY_FORM_SELECT = 'CATEGORY_FORM_SELECT'
@@ -12,10 +13,12 @@ export const PAGE_CONFIG_SAVE_FIELD = 'PAGE_CONFIG_SAVE_FIELD'
 
 export default function reducer(state, action) {
   switch (action.type) {
-    case TRANSACTIONS_LOAD:
+    case API_TRANSACTIONS_LOAD:
       return { ...state, transactions: action.payload }
-    case PURPOSE_CATEGORY_LOAD:
+    case API_PURPOSE_CATEGORY_LOAD:
       return { ...state, purposeCategory: action.payload }
+    case API_CONFIG_LOAD:
+      return { ...state, config: action.payload }
     case CATEGORY_FORM_OPEN:
       return {
         ...state,
@@ -52,7 +55,7 @@ export default function reducer(state, action) {
         ...state,
         config: {
           ...state.config,
-          ...action.payload
+          ...action.payload,
         },
       }
     default:

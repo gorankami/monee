@@ -7,6 +7,8 @@ const {
   postTransactions,
   getPurposeCategory,
   postPurposeCategory,
+  getConfig,
+  postConfig,
 } = require('./dbFs')
 
 app.use(bodyParser.json({ limit: '1mb' }))
@@ -42,6 +44,19 @@ app.post('/api/purposeCategory', async function (req, res) {
   const purposeCategory = res.body
   postPurposeCategory(purposeCategory)
   res.json(purposeCategory)
+})
+
+app.get('/api/config', async function (req, res) {
+  console.log('GET /api/config')
+  const config = getConfig()
+  res.json(config)
+})
+
+app.post('/api/config', async function (req, res) {
+  console.log('POST /api/config')
+  const config = res.body
+  postConfig(config)
+  res.json(config)
 })
 
 const port = 8080

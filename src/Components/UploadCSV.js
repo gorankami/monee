@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react'
 import { postTransactions } from '../apiActions'
 import csvStringToJson from '../digest/csvStringToJson'
-import { TRANSACTIONS_LOAD } from '../Model/reducer'
+import { API_TRANSACTIONS_LOAD } from '../Model/reducer'
 import { Context } from './StoreProvider'
 import './UploadCSV.css'
 
@@ -14,7 +14,7 @@ export default function UploadDB() {
       return { ...t, category: state.purposeCategory[t.purpose] }
     })
 
-    dispatch({ type: TRANSACTIONS_LOAD, payload: transactions })
+    dispatch({ type: API_TRANSACTIONS_LOAD, payload: transactions })
     postTransactions(transactions)
   }
 

@@ -2,62 +2,69 @@ const fs = require('fs')
 const homedir = require('os').homedir()
 
 const csvStringToJson = require('../csvStringToJson')
-let transactions = []
-let purposeCategory = {}
+let cachedDb = {
+  transactions: [],
+  purposeCategory: {},
+  config: {},
+}
 
 const dbFileTransactions = homedir + '/db_transactions.json'
 const dbFilePurposeCategory = homedir + '/db_purpose_category.json'
+const dbFileConfig = homedir + '/db_config.json'
 
-if (fs.existsSync(dbFileTransactions)) {
-  console.log('reading file ' + dbFileTransactions)
-  fs.readFile(dbFileTransactions, 'utf8', (err, data) => {
-    if (err) throw err
-    transactions = JSON.parse(data)
-  })
-} else {
-  fs.writeFile(dbFileTransactions, JSON.stringify(transactions), (err) => {
-    if (err) throw err
-  })
-}
-
-if (fs.existsSync(dbFilePurposeCategory)) {
-  fs.readFile(dbFilePurposeCategory, 'utf8', (err, data) => {
-    if (err) throw err
-    purposeCategory = JSON.parse(data)
-  })
-} else {
-  fs.writeFile(
-    dbFilePurposeCategory,
-    JSON.stringify(purposeCategory),
-    (err) => {
+function syncFile(filename, dbPropName) {
+  if (fs.existsSync(filename)) {
+    console.log('reading file ' + filename)
+    fs.readFile(filename, 'utf8', (err, data) => {
       if (err) throw err
-    },
-  )
+      cachedDb[dbPropName] = JSON.parse(data)
+    })
+  } else {
+    fs.writeFile(filename, JSON.stringify(cachedDb[dbPropName]), (err) => {
+      if (err) throw err
+    })
+  }
 }
+
+syncFile(dbFileTransactions, 'transactions')
+syncFile(dbFilePurposeCategory, 'purposeCategory')
+syncFile(dbFileConfig, 'config')
 
 function transactionReadCSV() {
   fs.readFile('PrintList.csv', 'utf8', (err, data) => {
     if (err) throw err
-    transactions = csvStringToJson(data)
+    cachedDb.transactions = csvStringToJson(data)
   })
 }
 
 function getTransactions() {
-  return transactions
+  return cachedDb.transactions
 }
 
 function postTransactions(data) {
-  transactions = data
-  fs.writeFileSync(dbFileTransactions, JSON.stringify(transactions))
+  cachedDb.transactions = data
+  fs.writeFileSync(dbFileTransactions, JSON.stringify(cachedDb.transactions))
 }
 
 function getPurposeCategory() {
-  return purposeCategory
+  return cachedDb.purposeCategory
 }
 
 function postPurposeCategory(data) {
-  purposeCategory = data
-  fs.writeFileSync(dbFilePurposeCategory, JSON.stringify(purposeCategory))
+  cachedDb.purposeCategory = data
+  fs.writeFileSync(
+    dbFilePurposeCategory,
+    JSON.stringify(cachedDb.purposeCategory),
+  )
+}
+
+function getConfig() {
+  return cachedDb.config
+}
+
+function postConfig(data) {
+  cachedDb.config = data
+  fs.writeFileSync(dbFilePurposeCategory, JSON.stringify(cachedDb.config))
 }
 
 module.exports = {
@@ -66,4 +73,6 @@ module.exports = {
   getPurposeCategory,
   postPurposeCategory,
   transactionReadCSV,
+  getConfig,
+  postConfig
 }

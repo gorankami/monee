@@ -4,11 +4,10 @@ import { CATEGORY_FORM_OPEN } from '../../../Model/reducer'
 import { Context } from '../../StoreProvider'
 import './TransactionList.css'
 
-export default function TransactionList() {
-  const [state] = useContext(Context)
+export default function TransactionList({ transactions }) {
   return (
     <div className="TransactionList">
-      {state.PageTransactions.filteredTransactions.map((t, i) => (
+      {transactions.map((t, i) => (
         <TransactionListItem key={i} transaction={t}></TransactionListItem>
       ))}
     </div>

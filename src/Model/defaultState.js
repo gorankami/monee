@@ -1,27 +1,14 @@
-import { PAGE_NAME_TRANSACTIONS } from '../Components/Pages/pageNames'
-
-const ts = localStorage.getItem('transactions')
-const pcs = localStorage.getItem('purposeCategory')
-const ccs = localStorage.getItem('config')
-let transactions = []
-let purposeCategory = {}
-let config = {
-  target: '',
-  targetAccountNumber: '',
-}
-
-try {
-  transactions = ts ? JSON.parse(ts) : []
-  purposeCategory = pcs ? JSON.parse(pcs) : {}
-  if (ccs) config = JSON.parse(ccs)
-} catch (e) {
-  console.warnign('could not parse local storage: ', ts, pcs)
-}
+import { PAGE_NAME_OVERVIEW } from '../Components/Pages/pageNames'
+import {
+  getConfig,
+  getPurposeCategory,
+  getTransactions,
+} from './localStorageManager'
 
 export const defaultState = {
-  transactions,
-  purposeCategory,
-  config,
+  transactions: getTransactions(),
+  purposeCategory: getPurposeCategory(),
+  config: getConfig(),
   CategoriesForm: {
     open: false,
     transaction: undefined,
@@ -29,5 +16,5 @@ export const defaultState = {
   PageTransactions: {
     filteredTransactions: [],
   },
-  currentPage: PAGE_NAME_TRANSACTIONS,
+  currentPage: PAGE_NAME_OVERVIEW,
 }
