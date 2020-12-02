@@ -16,6 +16,7 @@ export default function UploadDB() {
 
     dispatch({ type: API_TRANSACTIONS_LOAD, payload: transactions })
     postTransactions(transactions)
+    .catch((e) => console.error('Unable to post transactions to API', e))
   }
 
   function onFileSelection(e) {

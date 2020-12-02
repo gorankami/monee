@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const cors = require("cors")
 const {
   transactionReadCSV,
   getTransactions,
@@ -12,7 +13,8 @@ const {
 } = require('./dbFs')
 
 app.use(bodyParser.json({ limit: '1mb' }))
-app.use(express.static('build'))
+// app.use(express.static('build'))
+app.use(cors())
 
 app.post('/api/readcsv', function (req, res) {
   console.log('POST /api/readcsv')
@@ -55,8 +57,17 @@ app.get('/api/config', async function (req, res) {
 app.post('/api/config', async function (req, res) {
   console.log('POST /api/config')
   const config = res.body
-  postConfig(config)
-  res.json(config)
+  if(config){
+    console.log("POST config data: ", JSON.stringify(config))
+    postConfig(config)
+    res.json(config)
+  } else {
+    res.status(400)
+    res.json({
+      message: "Invalid JSON"
+    })
+  }
+  
 })
 
 const port = 8080

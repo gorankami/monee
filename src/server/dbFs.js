@@ -1,7 +1,7 @@
 const fs = require('fs')
 const homedir = require('os').homedir()
 
-const csvStringToJson = require('../csvStringToJson')
+const csvStringToJson = require('../digest/csvStringToJson')
 let cachedDb = {
   transactions: [],
   purposeCategory: {},
@@ -64,7 +64,7 @@ function getConfig() {
 
 function postConfig(data) {
   cachedDb.config = data
-  fs.writeFileSync(dbFilePurposeCategory, JSON.stringify(cachedDb.config))
+  fs.writeFileSync(dbFileConfig, JSON.stringify(cachedDb.config))
 }
 
 module.exports = {

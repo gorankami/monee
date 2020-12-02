@@ -7,8 +7,8 @@ import './Creditor.css'
 export default function Creditor() {
   const [state, dispatch] = useContext(Context)
   const [form, setForm] = useState({
-    target: state.config.target,
-    targetAccountNumber: state.config.targetAccountNumber,
+    target: state.config.target || "",
+    targetAccountNumber: state.config.targetAccountNumber || "",
   })
 
   const [showCreditorsList, setShowCreditorsList] = useState(false)

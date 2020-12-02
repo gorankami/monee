@@ -6,55 +6,61 @@ function serverErrorHandler(res) {
 }
 
 export function getTransactions() {
-  return fetch(`/api/transactions`)
+  return fetch(`http://localhost:8080/api/transactions`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error) && error)
 }
 
 export function getPurposeCategory() {
-  return fetch(`/api/purposeCategory`)
+  return fetch(`http://localhost:8080/api/purposeCategory`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error) && error)
 }
 
 export function getConfig() {
-  return fetch(`/api/config`)
+  return fetch(`http://localhost:8080/api/config`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error) && error)
 }
 
 export function postTransactions(transactions) {
-  return fetch(`/api/transactions`, {
+  return fetch(`http://localhost:8080/api/transactions`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(transactions),
-  }).then((res) => res.json())
+  })
+    .then(serverErrorHandler)
+    .then((res) => res.json())
 }
 
 export function postPurposeCategory(purposeCategory) {
-  return fetch(`/api/purposeCategory`, {
+  return fetch(`http://localhost:8080/api/purposeCategory`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(purposeCategory),
-  }).then((res) => res.json())
+  })
+    .then(serverErrorHandler)
+    .then((res) => res.json())
 }
 
 export function postConfig(config) {
-  return fetch(`/api/config`, {
+  return fetch(`http://localhost:8080/api/config`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(config),
-  }).then((res) => res.json())
+  })
+    .then(serverErrorHandler)
+    .then((res) => res.json())
 }

@@ -25,8 +25,14 @@ export function getConfig() {
   }
 }
 
-export function setStorageData(state) {
-  localStorage.setItem('transactions', JSON.stringify(state.transactions))
-  localStorage.setItem('purposeCategory', JSON.stringify(state.purposeCategory))
-  localStorage.setItem('config', JSON.stringify(state.config))
+export function setTransactions(transactions) {
+  localStorage.setItem('transactions', JSON.stringify(transactions))
+}
+
+export function setPurposeCategory(purposeCategory) {
+  localStorage.setItem('purposeCategory', JSON.stringify(purposeCategory))
+}
+
+export function setConfig(config) {
+  localStorage.setItem('config', JSON.stringify(config))
 }
