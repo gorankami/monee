@@ -3,7 +3,7 @@ import {
   getConfig,
   getPurposeCategory,
   getTransactions,
-  getCurrentPage
+  getCurrentPage,
 } from './localStorageManager'
 
 export const defaultState = {

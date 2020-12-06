@@ -17,7 +17,7 @@ export default function OverviewPage() {
   return (
     <>
       <h1>Uncategorized:</h1>
-      <TransactionList transactions={uncategorizedTransactions} />
+      {/* <TransactionList transactions={uncategorizedTransactions} /> */}
     </>
   )
 }

@@ -1,31 +1,35 @@
 export function getTransactions() {
+  let result
   try {
-    return JSON.parse(localStorage.getItem('transactions'))
+    result = JSON.parse(localStorage.getItem('transactions'))
   } catch (e) {
     console.log('Error parsing transactions from local storage')
-    return []
   }
+  return result || []
 }
 
 export function getPurposeCategory() {
+  let result
   try {
-    return JSON.parse(localStorage.getItem('purposeCategory'))
+    result = JSON.parse(localStorage.getItem('purposeCategory'))
   } catch (e) {
     console.log('Error parsing purposeCategory from local storage')
-    return []
   }
+  return result || []
 }
 
 export function getConfig() {
+  let result
   try {
-    return JSON.parse(localStorage.getItem('config'))
+    result = JSON.parse(localStorage.getItem('config'))
   } catch (e) {
     console.log('Error parsing config from local storage')
     return { target: '', targetAccountNumber: '' }
   }
+  return result || {}
 }
 
-export function getCurrentPage(){
+export function getCurrentPage() {
   try {
     return JSON.parse(localStorage.getItem('currentPage'))
   } catch (e) {
