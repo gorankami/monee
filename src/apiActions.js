@@ -5,34 +5,39 @@ function serverErrorHandler(res) {
   return res
 }
 
+let url = ""
+// url = "http://localhost:8080"
+
 export function getTransactions() {
-  return fetch(`http://localhost:8080/api/transactions`)
+  return fetch(`${url}/api/transactions`)
     .then(serverErrorHandler)
     .then((res) => res.json())
     .catch((error) => console.log(error) && error)
 }
 
 export function getPurposeCategory() {
-  return fetch(`http://localhost:8080/api/purposeCategory`)
+  return fetch(`${url}/api/purposeCategory`)
     .then(serverErrorHandler)
     .then((res) => res.json())
     .catch((error) => console.log(error) && error)
 }
 
 export function getConfig() {
-  return fetch(`http://localhost:8080/api/config`)
+  return fetch(`${url}/api/config`)
     .then(serverErrorHandler)
     .then((res) => res.json())
     .catch((error) => console.log(error) && error)
 }
 
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+}
+
 export function postTransactions(transactions) {
-  return fetch(`http://localhost:8080/api/transactions`, {
+  return fetch(`${url}/api/transactions`, {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(transactions),
   })
     .then(serverErrorHandler)
@@ -40,12 +45,9 @@ export function postTransactions(transactions) {
 }
 
 export function postPurposeCategory(purposeCategory) {
-  return fetch(`http://localhost:8080/api/purposeCategory`, {
+  return fetch(`${url}/api/purposeCategory`, {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(purposeCategory),
   })
     .then(serverErrorHandler)
@@ -53,12 +55,9 @@ export function postPurposeCategory(purposeCategory) {
 }
 
 export function postConfig(config) {
-  return fetch(`http://localhost:8080/api/config`, {
+  return fetch(`${url}/api/config`, {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(config),
   })
     .then(serverErrorHandler)

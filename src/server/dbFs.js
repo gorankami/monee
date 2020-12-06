@@ -74,5 +74,5 @@ module.exports = {
   postPurposeCategory,
   transactionReadCSV,
   getConfig,
-  postConfig
+  postConfig,
 }

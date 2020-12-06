@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const cors = require("cors")
+
 const {
   transactionReadCSV,
   getTransactions,
@@ -12,9 +12,10 @@ const {
   postConfig,
 } = require('./dbFs')
 
+// app.use(cors())
 app.use(bodyParser.json({ limit: '1mb' }))
 // app.use(express.static('build'))
-app.use(cors())
+// })
 
 app.post('/api/readcsv', function (req, res) {
   console.log('POST /api/readcsv')
@@ -31,8 +32,12 @@ app.get('/api/transactions', async function (req, res) {
 app.post('/api/transactions', async function (req, res) {
   console.log('POST /api/transactions')
   const transactions = req.body
-  postTransactions(transactions)
-  res.json(transactions)
+  if (transactions) {
+    postTransactions(transactions)
+    res.json(transactions)
+  } else {
+    handleInvalidJson(res)
+  }
 })
 
 app.get('/api/purposeCategory', async function (req, res) {
@@ -43,9 +48,13 @@ app.get('/api/purposeCategory', async function (req, res) {
 
 app.post('/api/purposeCategory', async function (req, res) {
   console.log('POST /api/purposeCategory')
-  const purposeCategory = res.body
-  postPurposeCategory(purposeCategory)
-  res.json(purposeCategory)
+  const purposeCategory = req.body
+  if (purposeCategory) {
+    postPurposeCategory(purposeCategory)
+    res.json(purposeCategory)
+  } else {
+    handleInvalidJson(res)
+  }
 })
 
 app.get('/api/config', async function (req, res) {
@@ -56,19 +65,22 @@ app.get('/api/config', async function (req, res) {
 
 app.post('/api/config', async function (req, res) {
   console.log('POST /api/config')
-  const config = res.body
-  if(config){
-    console.log("POST config data: ", JSON.stringify(config))
+  const config = req.body
+  if (config) {
     postConfig(config)
     res.json(config)
   } else {
-    res.status(400)
-    res.json({
-      message: "Invalid JSON"
-    })
+    handleInvalidJson(res)
   }
-  
 })
+
+function handleInvalidJson(res) {
+  res.status(400)
+  const message = 'Invalid JSON'
+  console.error(message)
+  res.json({ message })
+}
+
 
 const port = 8080
 app.listen(port, () => {
