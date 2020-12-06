@@ -31,10 +31,12 @@ export default function reducer(state, action) {
     case CATEGORY_FORM_CANCEL:
       return { ...state, CategoriesForm: { isOpen: false } }
     case CATEGORY_FORM_SELECT:
-      const purposeCategory = {
-        ...state.purposeCategory,
-        [state.CategoriesForm.transaction.purpose]: action.payload,
-      }
+      const { purpose } = state.CategoriesForm.transaction
+      let findRes = { purpose: purpose, category: action.payload }
+      const newPC = state.purposeCategory.filter((pc) => pc.purpose !== purpose)
+
+      const purposeCategory = [...newPC, findRes]
+
       localStorageManager.setPurposeCategory(purposeCategory)
       apiActions
         .postPurposeCategory(purposeCategory)
@@ -54,6 +56,7 @@ export default function reducer(state, action) {
         },
       }
     case PAGE_GOTO:
+      localStorageManager.setCurrentPage(action.payload)
       return {
         ...state,
         currentPage: action.payload,

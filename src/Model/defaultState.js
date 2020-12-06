@@ -3,6 +3,7 @@ import {
   getConfig,
   getPurposeCategory,
   getTransactions,
+  getCurrentPage
 } from './localStorageManager'
 
 export const defaultState = {
@@ -16,5 +17,5 @@ export const defaultState = {
   PageTransactions: {
     filteredTransactions: [],
   },
-  currentPage: PAGE_NAME_OVERVIEW,
+  currentPage: getCurrentPage() || PAGE_NAME_OVERVIEW,
 }

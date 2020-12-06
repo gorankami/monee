@@ -1,3 +1,5 @@
+import { defaultState } from "./Model/defaultState"
+
 function serverErrorHandler(res) {
   if (!res.ok) {
     throw Error(res.statusText)
@@ -12,21 +14,30 @@ export function getTransactions() {
   return fetch(`${url}/api/transactions`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error) && error)
+    .catch((error) => {
+      console.log(error)
+      return defaultState.transactions; 
+    })
 }
 
 export function getPurposeCategory() {
   return fetch(`${url}/api/purposeCategory`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error) && error)
+    .catch((error) => {
+      console.log(error)
+      return defaultState.purposeCategory; 
+    })
 }
 
 export function getConfig() {
   return fetch(`${url}/api/config`)
     .then(serverErrorHandler)
     .then((res) => res.json())
-    .catch((error) => console.log(error) && error)
+    .catch((error) => {
+      console.log(error)
+      return defaultState.config; 
+    })
 }
 
 const headers = {

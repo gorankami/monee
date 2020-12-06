@@ -4,7 +4,7 @@ const homedir = require('os').homedir()
 const csvStringToJson = require('../digest/csvStringToJson')
 let cachedDb = {
   transactions: [],
-  purposeCategory: {},
+  purposeCategory: [],
   config: {},
 }
 

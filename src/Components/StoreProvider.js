@@ -20,9 +20,9 @@ export default function StoreProvider({ children }) {
       .catch((e) => console.error('Unable to load transactions from API', e))
 
     getPurposeCategory()
-      .then((purposeCategory) =>
-        dispatch({ type: API_PURPOSE_CATEGORY_LOAD, payload: purposeCategory }),
-      )
+      .then((purposeCategory) => {
+        dispatch({ type: API_PURPOSE_CATEGORY_LOAD, payload: purposeCategory })
+      })
       .catch((e) => console.error('Unable to load purposeCategory from API', e))
 
     getConfig()

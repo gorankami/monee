@@ -1,17 +1,17 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { CATEGORY_FORM_CANCEL, CATEGORY_FORM_SELECT } from '../../Model/reducer'
 import './CategoriesForm.css'
 import { Context } from '../StoreProvider'
+import { uniq } from 'lodash'
 
 export default function CategoriesForm() {
   const [txtInput, setTxtInput] = useState('')
+  const [categories, setCategories] = useState([])
   const [state, dispatch] = useContext(Context)
-
-  const categories = []
-  Object.keys(state.purposeCategory).forEach((purpose) => {
-    const category = state.purposeCategory[purpose]
-    if (categories.indexOf(category) === -1) categories.push(category)
-  })
+  
+  useEffect(() => {
+    setCategories(uniq(state.purposeCategory.map((pc) => pc.category)))
+  }, [])
 
   function onChange(e) {
     setTxtInput(e.target.value)

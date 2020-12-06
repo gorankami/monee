@@ -21,7 +21,8 @@ function TransactionListItem({ transaction }) {
     <span className="gain">▲</span>
   )
   const [state, dispatch] = useContext(Context)
-  const category = state.purposeCategory[transaction.purpose]
+  const findRes = state.purposeCategory.find((pc) => pc.purpose === transaction.purpose)
+  const category = findRes ? findRes.category : undefined
   function addCategory() {
     dispatch({ type: CATEGORY_FORM_OPEN, payload: transaction })
   }

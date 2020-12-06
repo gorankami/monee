@@ -8,7 +8,8 @@ export default function MonthSummary({ monthlyTransactions }) {
   const [state] = useContext(Context)
   const categoryCurrencyArray = {}
   monthlyTransactions.forEach((t) => {
-    const category = state.purposeCategory[t.purpose] || 'uncategorized'
+    const findRes = state.purposeCategory.find((pc) => pc.purpose === t.purpose)
+    const category = findRes ? findRes.category : 'uncategorized'
     if (!categoryCurrencyArray[category]) categoryCurrencyArray[category] = {}
     const currency = t.currency || 'N/A'
     if (!categoryCurrencyArray[category][currency])

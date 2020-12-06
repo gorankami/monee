@@ -1,18 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../StoreProvider'
 import TransactionList from '../Transactions/TransactionList'
 
 export default function OverviewPage() {
   const [state] = useContext(Context)
+  const [uncategorizedTransactions, setUncategorizedTransactions] = useState([])
 
-  const uncategorizedTransactions = state.transactions.filter(
-    (t) => !state.purposeCategory[t.purpose],
-  )
+  useEffect(() => {
+    setUncategorizedTransactions(
+      state.transactions.filter(
+        (t) => !state.purposeCategory.find((pc) => pc.purpose === t.purpose),
+      ),
+    )
+  })
 
   return (
     <>
       <h1>Uncategorized:</h1>
-      <TransactionList transactions={uncategorizedTransactions}/>
+      <TransactionList transactions={uncategorizedTransactions} />
     </>
   )
 }

@@ -18,7 +18,7 @@ export default function TransactionRow({ transaction }) {
         <DisplayAmount {...transaction} />
       </td>
       <td className="category">
-        <DisplayCategory {...transaction}/>
+        <DisplayCategory {...transaction} />
       </td>
     </tr>
   )
@@ -48,7 +48,8 @@ function DisplayAmount({ target, targetAccountNumber, amount, currency }) {
 
 function DisplayCategory(transaction) {
   const [state, dispatch] = useContext(Context)
-  const category = state.purposeCategory[transaction.purpose];
+  const findRes = state.purposeCategory.find((pc) => pc.purpose === transaction.purpose)
+  const category = findRes ? findRes.category : undefined
 
   function addCategory() {
     dispatch({ type: CATEGORY_FORM_OPEN, payload: transaction })

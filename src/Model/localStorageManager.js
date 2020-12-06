@@ -12,7 +12,7 @@ export function getPurposeCategory() {
     return JSON.parse(localStorage.getItem('purposeCategory'))
   } catch (e) {
     console.log('Error parsing purposeCategory from local storage')
-    return {}
+    return []
   }
 }
 
@@ -22,6 +22,15 @@ export function getConfig() {
   } catch (e) {
     console.log('Error parsing config from local storage')
     return { target: '', targetAccountNumber: '' }
+  }
+}
+
+export function getCurrentPage(){
+  try {
+    return JSON.parse(localStorage.getItem('currentPage'))
+  } catch (e) {
+    console.log('Error parsing currentPage from local storage')
+    return undefined
   }
 }
 
@@ -35,4 +44,8 @@ export function setPurposeCategory(purposeCategory) {
 
 export function setConfig(config) {
   localStorage.setItem('config', JSON.stringify(config))
+}
+
+export function setCurrentPage(currentPage) {
+  localStorage.setItem('currentPage', JSON.stringify(currentPage))
 }

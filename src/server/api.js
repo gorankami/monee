@@ -2,15 +2,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
+const DB = require('./dbFs')
 const {
-  transactionReadCSV,
-  getTransactions,
-  postTransactions,
-  getPurposeCategory,
-  postPurposeCategory,
-  getConfig,
-  postConfig,
-} = require('./dbFs')
+  validateTransactionsJSON,
+  validatePurposeCategoryJSON,
+  validateConfigJSON,
+} = require('../jsonValidator')
 
 // app.use(cors())
 app.use(bodyParser.json({ limit: '1mb' }))
@@ -19,68 +16,87 @@ app.use(bodyParser.json({ limit: '1mb' }))
 
 app.post('/api/readcsv', function (req, res) {
   console.log('POST /api/readcsv')
-  transactionReadCSV()
+  DB.transactionReadCSV()
   res.json({ message: 'Reading file, call /transations to get results' })
 })
 
+const ERR_CORRUPTED_DB = 'Corrupted database'
+const ERR_INVALID_JSON = 'Invalid JSON'
+
 app.get('/api/transactions', async function (req, res) {
   console.log('GET /api/transactions')
-  const transactions = getTransactions()
-  res.json(transactions)
+  const transactions = DB.getTransactions()
+  const { errors, valid } = validateTransactionsJSON(transactions)
+  if (valid) {
+    res.json(transactions)
+  } else {
+    res.status(400)
+    res.json({ message: ERR_CORRUPTED_DB, errors })
+  }
 })
 
 app.post('/api/transactions', async function (req, res) {
   console.log('POST /api/transactions')
   const transactions = req.body
-  if (transactions) {
-    postTransactions(transactions)
+  const { errors, valid } = validateTransactionsJSON(transactions)
+  if (valid) {
+    DB.postTransactions(transactions)
     res.json(transactions)
   } else {
-    handleInvalidJson(res)
+    res.status(400)
+    res.json({ message: ERR_INVALID_JSON, errors })
   }
 })
 
 app.get('/api/purposeCategory', async function (req, res) {
   console.log('GET /api/purposeCategory')
-  const purposeCategory = getPurposeCategory()
-  res.json(purposeCategory)
+  const purposeCategory = DB.getPurposeCategory()
+  const { errors, valid } = validatePurposeCategoryJSON(purposeCategory)
+  if (valid) {
+    res.json(purposeCategory)
+  } else {
+    res.status(400)
+    res.json({ message: ERR_CORRUPTED_DB, errors })
+  }
 })
 
 app.post('/api/purposeCategory', async function (req, res) {
   console.log('POST /api/purposeCategory')
   const purposeCategory = req.body
-  if (purposeCategory) {
-    postPurposeCategory(purposeCategory)
+  const { errors, valid } = validatePurposeCategoryJSON(purposeCategory)
+  if (valid) {
+    DB.postPurposeCategory(purposeCategory)
     res.json(purposeCategory)
   } else {
-    handleInvalidJson(res)
+    res.status(400)
+    res.json({ message: ERR_INVALID_JSON, errors })
   }
 })
 
 app.get('/api/config', async function (req, res) {
   console.log('GET /api/config')
-  const config = getConfig()
-  res.json(config)
+  const config = DB.getConfig()
+  const { errors, valid } = validateConfigJSON(config)
+  if (valid) {
+    res.json(config)
+  } else {
+    res.status(400)
+    res.json({ message: ERR_CORRUPTED_DB, errors })
+  }
 })
 
 app.post('/api/config', async function (req, res) {
   console.log('POST /api/config')
   const config = req.body
-  if (config) {
-    postConfig(config)
+  const { errors, valid } = validateConfigJSON(config)
+  if (valid) {
+    DB.postConfig(config)
     res.json(config)
   } else {
-    handleInvalidJson(res)
+    res.status(400)
+    res.json({ message: ERR_INVALID_JSON, errors })
   }
 })
-
-function handleInvalidJson(res) {
-  res.status(400)
-  const message = 'Invalid JSON'
-  console.error(message)
-  res.json({ message })
-}
-
 
 const port = 8080
 app.listen(port, () => {
