@@ -12,8 +12,8 @@ export default function CategoriesForm() {
   const [pagedCategories, setPagedCategories] = useState([])
 
   useEffect(() => {
-    setCategories(uniq(state.purposeCategory.map((pc) => pc.category)))
-  }, [])
+    setCategories(uniq(state.purposeCategory.map((pc) => pc.category)).sort())
+  }, [state.purposeCategory])
 
   function onChange(e) {
     setTxtInput(e.target.value)
