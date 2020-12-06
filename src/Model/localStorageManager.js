@@ -1,3 +1,5 @@
+import { convertPurposeCategoryMapToArray } from '../digest/convertPurposeCategoryMapToArray'
+
 export function getTransactions() {
   let result
   try {
@@ -12,6 +14,8 @@ export function getPurposeCategory() {
   let result
   try {
     result = JSON.parse(localStorage.getItem('purposeCategory'))
+    if (result.length === undefined)
+      result = convertPurposeCategoryMapToArray(result)
   } catch (e) {
     console.log('Error parsing purposeCategory from local storage')
   }

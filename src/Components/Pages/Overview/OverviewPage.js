@@ -12,13 +12,12 @@ export default function OverviewPage() {
         (t) => !state.purposeCategory.find((pc) => pc.purpose === t.purpose),
       ),
     )
-  })
+  }, [state.transactions, state.purposeCategory])
 
   return (
     <>
       <h1>Uncategorized:</h1>
       <TransactionList transactions={uncategorizedTransactions} />
-      
     </>
   )
 }
