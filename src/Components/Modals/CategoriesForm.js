@@ -3,12 +3,14 @@ import { CATEGORY_FORM_CANCEL, CATEGORY_FORM_SELECT } from '../../Model/reducer'
 import './CategoriesForm.css'
 import { Context } from '../StoreProvider'
 import { uniq } from 'lodash'
+import Paginator from '../Paginator'
 
 export default function CategoriesForm() {
   const [txtInput, setTxtInput] = useState('')
   const [categories, setCategories] = useState([])
   const [state, dispatch] = useContext(Context)
-  
+  const [pagedCategories, setPagedCategories] = useState([])
+
   useEffect(() => {
     setCategories(uniq(state.purposeCategory.map((pc) => pc.category)))
   }, [])
@@ -45,7 +47,7 @@ export default function CategoriesForm() {
           <li datacategory={undefined} onClick={() => select()}>
             None
           </li>
-          {categories.map((category, i) => (
+          {pagedCategories.map((category, i) => (
             <li
               key={i}
               datacategory={undefined}
@@ -55,6 +57,7 @@ export default function CategoriesForm() {
             </li>
           ))}
         </ul>
+        <Paginator items={categories} onPageChange={setPagedCategories} />
       </div>
     </div>
   )
