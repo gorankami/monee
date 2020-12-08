@@ -10,6 +10,11 @@ export const defaultState = {
   transactions: getTransactions(),
   purposeCategory: getPurposeCategory(),
   config: getConfig(),
+  filters: {
+    categories: [],
+    months: [],
+    years: []
+  },
   CategoriesForm: {
     open: false,
     transaction: undefined,

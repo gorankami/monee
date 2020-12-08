@@ -1,6 +1,7 @@
 import * as apiActions from '../apiActions'
 import { filterByMonth } from '../digest/filterByMonth'
 import * as localStorageManager from './localStorageManager'
+import { uniq } from 'lodash'
 
 export const API_TRANSACTIONS_LOAD = 'API_TRANSACTIONS_LOAD'
 export const API_PURPOSE_CATEGORY_LOAD = 'API_PURPOSE_CATEGORY_LOAD'
@@ -16,10 +17,26 @@ export default function reducer(state, action) {
   switch (action.type) {
     case API_TRANSACTIONS_LOAD:
       localStorageManager.setTransactions(action.payload)
-      return { ...state, transactions: action.payload }
+      const months = uniq(
+        action.payload.map((t) => {
+          const ds = t.date.split('.')
+          return `${ds[1]}.${ds[2]}`
+        }),
+      )
+      const years = uniq(months.map((m) => m.split('.')[1]))
+      return {
+        ...state,
+        transactions: action.payload,
+        filters: { ...state.filters, months, years },
+      }
     case API_PURPOSE_CATEGORY_LOAD:
       localStorageManager.setPurposeCategory(action.payload)
-      return { ...state, purposeCategory: action.payload }
+      const categories = uniq(action.payload.map((pc) => pc.category))
+      return {
+        ...state,
+        purposeCategory: action.payload,
+        filters: { ...state.filters, categories },
+      }
     case API_CONFIG_LOAD:
       localStorageManager.setConfig(action.payload)
       return { ...state, config: action.payload }
