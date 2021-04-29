@@ -11,7 +11,7 @@ const {
 
 // app.use(cors())
 app.use(bodyParser.json({ limit: '1mb' }))
-// app.use(express.static('build'))
+app.use(express.static('build'))
 // })
 
 app.post('/api/readcsv', function (req, res) {
